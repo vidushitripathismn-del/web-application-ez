@@ -1,0 +1,247 @@
+{
+  "info": {
+    "name": "Contact Form API Test",
+    "description": "Test collection for EZ Labs Front-End Intern Assignment - Contact Form API Integration",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Successful Form Submission",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"name\": \"John Doe\",\n  \"email\": \"john.doe@example.com\",\n  \"phone\": \"+1 (555) 123-4567\",\n  \"message\": \"This is a test message for the contact form. I am interested in learning more about your services.\"\n}"
+        },
+        "url": {
+          "raw": "https://vernanbackend.ezlab.in/api/contact-us/",
+          "protocol": "https",
+          "host": [
+            "vernanbackend",
+            "ezlab",
+            "in"
+          ],
+          "path": [
+            "api",
+            "contact-us",
+            ""
+          ]
+        },
+        "description": "Test case for successful form submission with all required fields filled correctly."
+      },
+      "response": []
+    },
+    {
+      "name": "Valid Submission - Different User",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"name\": \"Jane Smith\",\n  \"email\": \"jane.smith@company.com\",\n  \"phone\": \"555-987-6543\",\n  \"message\": \"Hello! I would like to discuss potential collaboration opportunities. Please contact me at your earliest convenience.\"\n}"
+        },
+        "url": {
+          "raw": "https://vernanbackend.ezlab.in/api/contact-us/",
+          "protocol": "https",
+          "host": [
+            "vernanbackend",
+            "ezlab",
+            "in"
+          ],
+          "path": [
+            "api",
+            "contact-us",
+            ""
+          ]
+        },
+        "description": "Another test case with different valid user data to verify consistent API behavior."
+      },
+      "response": []
+    },
+    {
+      "name": "Empty Request Body (Should Fail)",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{}"
+        },
+        "url": {
+          "raw": "https://vernanbackend.ezlab.in/api/contact-us/",
+          "protocol": "https",
+          "host": [
+            "vernanbackend",
+            "ezlab",
+            "in"
+          ],
+          "path": [
+            "api",
+            "contact-us",
+            ""
+          ]
+        },
+        "description": "Test case for empty form submission. This should fail validation on the client-side in the actual application, but we're testing the API response here."
+      },
+      "response": []
+    },
+    {
+      "name": "Missing Email Field (Should Fail)",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"name\": \"Test User\",\n  \"phone\": \"+1-555-0000\",\n  \"message\": \"This is a test message without email field.\"\n}"
+        },
+        "url": {
+          "raw": "https://vernanbackend.ezlab.in/api/contact-us/",
+          "protocol": "https",
+          "host": [
+            "vernanbackend",
+            "ezlab",
+            "in"
+          ],
+          "path": [
+            "api",
+            "contact-us",
+            ""
+          ]
+        },
+        "description": "Test case with missing email field. Client-side validation should prevent this, but testing API response."
+      },
+      "response": []
+    },
+    {
+      "name": "Invalid Email Format (Should Fail)",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"name\": \"Invalid Email User\",\n  \"email\": \"not-an-email\",\n  \"phone\": \"555-1234\",\n  \"message\": \"Testing with invalid email format that should be caught by client-side validation.\"\n}"
+        },
+        "url": {
+          "raw": "https://vernanbackend.ezlab.in/api/contact-us/",
+          "protocol": "https",
+          "host": [
+            "vernanbackend",
+            "ezlab",
+            "in"
+          ],
+          "path": [
+            "api",
+            "contact-us",
+            ""
+          ]
+        },
+        "description": "Test case with invalid email format. The React application prevents this with Zod validation, but we test the API's handling of invalid data."
+      },
+      "response": []
+    },
+    {
+      "name": "Special Characters in Name",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"name\": \"José María O'Brien-Smith\",\n  \"email\": \"jose.maria@example.com\",\n  \"phone\": \"+34 612 345 678\",\n  \"message\": \"Testing form submission with international characters and special symbols in name field.\"\n}"
+        },
+        "url": {
+          "raw": "https://vernanbackend.ezlab.in/api/contact-us/",
+          "protocol": "https",
+          "host": [
+            "vernanbackend",
+            "ezlab",
+            "in"
+          ],
+          "path": [
+            "api",
+            "contact-us",
+            ""
+          ]
+        },
+        "description": "Test case with special characters and international characters in the name field."
+      },
+      "response": []
+    },
+    {
+      "name": "Long Message Content",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"name\": \"Alice Johnson\",\n  \"email\": \"alice.johnson@enterprise.com\",\n  \"phone\": \"+1 (800) 555-0199\",\n  \"message\": \"This is a comprehensive test message that contains a significant amount of text to verify that the API can handle longer message content. In real-world scenarios, users might write detailed inquiries about products, services, or support requests that span multiple paragraphs. This test ensures the form can accommodate such use cases without issues. The message includes various sentence structures, punctuation marks, and maintains a professional tone throughout. It's important to validate that both the frontend textarea and backend API can properly process and store extended message content without truncation or errors.\"\n}"
+        },
+        "url": {
+          "raw": "https://vernanbackend.ezlab.in/api/contact-us/",
+          "protocol": "https",
+          "host": [
+            "vernanbackend",
+            "ezlab",
+            "in"
+          ],
+          "path": [
+            "api",
+            "contact-us",
+            ""
+          ]
+        },
+        "description": "Test case with a long message to ensure the API can handle extended text content."
+      },
+      "response": []
+    }
+  ],
+  "variable": [
+    {
+      "key": "base_url",
+      "value": "https://vernanbackend.ezlab.in",
+      "type": "string"
+    }
+  ]
+}
